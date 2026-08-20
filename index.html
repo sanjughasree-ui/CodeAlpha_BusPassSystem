@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TransitPass — Cloud-Based Bus Pass System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark">▮▮▮</span>
+    <span class="brand-name">TransitPass</span>
+  </div>
+  <nav class="tabs" id="tabs">
+    <button class="tab active" data-view="apply">Apply</button>
+    <button class="tab" data-view="mypass">My Pass</button>
+    <button class="tab" data-view="admin">Admin</button>
+  </nav>
+</header>
+
+<main>
+
+  <!-- APPLY VIEW -->
+  <section class="view active" id="view-apply">
+    <div class="hero">
+      <p class="eyebrow">Route 04 · City Circular</p>
+      <h1>One pass.<br>Every route.</h1>
+      <p class="sub">Apply for a student bus pass. Applications are reviewed by an admin — no queue, no paperwork.</p>
+    </div>
+
+    <form id="applyForm" class="ticket-form">
+      <div class="field">
+        <label for="fullName">Full name</label>
+        <input type="text" id="fullName" required placeholder="e.g. Sanjugha S">
+      </div>
+      <div class="field">
+        <label for="studentId">Student ID</label>
+        <input type="text" id="studentId" required placeholder="e.g. AVS2024ECE041">
+      </div>
+      <div class="field">
+        <label for="route">Route</label>
+        <select id="route" required>
+          <option value="">Select a route</option>
+          <option>Route 01 · College Loop</option>
+          <option>Route 02 · Railway Junction</option>
+          <option>Route 03 · New Bus Stand</option>
+          <option>Route 04 · City Circular</option>
+          <option>Route 05 · Hosur Road</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="phone">Phone number</label>
+        <input type="tel" id="phone" required placeholder="10-digit mobile number" pattern="[0-9]{10}">
+      </div>
+      <button type="submit" class="btn-primary">Submit application</button>
+      <p class="form-note" id="applyNote"></p>
+    </form>
+  </section>
+
+  <!-- MY PASS VIEW -->
+  <section class="view" id="view-mypass">
+    <div class="hero hero-compact">
+      <p class="eyebrow">Status check</p>
+      <h1>Find your pass</h1>
+      <p class="sub">Enter the student ID you applied with.</p>
+    </div>
+
+    <div class="lookup-row">
+      <input type="text" id="lookupId" placeholder="Student ID">
+      <button id="lookupBtn" class="btn-secondary">Check status</button>
+    </div>
+
+    <div id="passResult" class="pass-result"></div>
+  </section>
+
+  <!-- ADMIN VIEW -->
+  <section class="view" id="view-admin">
+    <div class="hero hero-compact">
+      <p class="eyebrow">Depot control</p>
+      <h1>Review applications</h1>
+      <p class="sub">Approve, reject, or revoke passes. Everything here is stored on this device.</p>
+    </div>
+
+    <div class="admin-stats" id="adminStats"></div>
+    <div class="admin-list" id="adminList"></div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <span>TransitPass · Data is stored locally in this browser (no server) · CodeAlpha Cloud Computing Internship</span>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
