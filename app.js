@@ -78,6 +78,7 @@ applyForm.addEventListener("submit", e => {
   applyForm.reset();
   applyNote.textContent = "Application submitted. Check status under \"My Pass\".";
   applyNote.className = "form-note ok";
+  toast("✓ Application submitted");
 });
 
 /* ---------------- My Pass lookup ---------------- */
@@ -106,6 +107,7 @@ function doLookup() {
         status: "approved"
       });
       doLookup();
+      toast("✓ Pass renewed for 30 days");
     });
   }
 }
@@ -209,14 +211,27 @@ function renderAdmin() {
       const action = btn.dataset.action;
       if (action === "approve") {
         STORE.update(id, { status: "approved", expiryDate: Date.now() + PASS_VALIDITY_DAYS * 86400000 });
+        toast("✓ Pass approved");
       } else if (action === "reject") {
         STORE.update(id, { status: "rejected", expiryDate: null });
+        toast("Application rejected");
       } else if (action === "revoke") {
         STORE.update(id, { status: "rejected", expiryDate: null });
+        toast("Pass revoked");
       }
       renderAdmin();
     });
   });
+}
+
+/* ---------------- Toast ---------------- */
+let toastTimer;
+function toast(message) {
+  const el = document.getElementById("toast");
+  el.textContent = message;
+  el.classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.classList.remove("show"), 2400);
 }
 
 function escapeHtml(str) {
